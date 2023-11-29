@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+  <link rel="stylesheet" href="./dist/keluar.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="rps.jpeg">
+  <link rel="manifest" href="manifest.json">
+  <title>game</title>
+</head>
+<body class="h-[90vh] font-[Orbitron] p-3 flex flex-col w-screen justify-between">
+  <!-- Status -->
+  <div id="status" class="flex flex-col gap-10 justify-center items-center border-2 border-black absolute top-[-100vh] left-9 animation duration-200 ease-in-out h-2/3 w-4/5 rounded bg-white">
+    <h1 id="statusBar" class="text-4xl"></h1>
+    <a href="./index.html" class="text-lg">Back to menu</a>
+  </div>
+  <!-- Computer -->
+  <div class="h-2/5 flex flex-col items-center gap-2">
+    <h1 class="text-4xl font-bold">Computer</h1>
+    <h1 id="comScore" class="text-3xl"></h1>
+    <img src="" alt="" id="comPic" class="h-3/5">
+    <h1 id="comStatus" class="text-3xl"></h1>
+  </div>
+  <!-- Player -->
+  <div class="h-2/5 flex flex-col items-center gap-2" >
+    <h1 class="text-4xl font-bold">Player</h1>
+    <h1 id="playerScore" class="text-3xl"></h1>
+    <img src="" class="h-3/5" alt="" id="playerPic">
+    <h1 id="playerStatus" class="text-3xl"></h1>
+  </div>
+  <div class="w-full flex justify-between">
+    <button id="rock" onclick="rock()" class="border-2 border-black p-2 rounded text-lg">Rock</button>
+    <button id="paper" onclick="paper()" class="border-2 border-black p-2 rounded text-lg">Paper</button>
+    <button id="scissors" onclick="scissors()" class="border-2 border-black p-2 rounded text-lg">Scissors</button>
+  </div>
+  <script>
+    let data = [
+      {
+        name:"Rock",
+        src:"./asset/rock.png"
+      },
+      {
+        name:"Paper",
+        src:"./asset/paper.png"
+      }, 
+      {
+        name:"Scissors",
+        src:"./asset/scissors.png"
+      }
+      ]
+      let status = ["Win","Draw","Lose"]
+      let rocks = document.getElementById("rock")
+      let papers = document.getElementById("paper")
+      let scissorss = document.getElementById("scissors")
+      let comPic = document.getElementById("comPic")
+      let playerPic = document.getElementById("playerPic")
+      let comScore = document.getElementById("comScore")
+      let playerScore = document.getElementById("playerScore")
+      let comStatus = document.getElementById("comStatus")
+      let playerStatus = document.getElementById("playerStatus")
+      let statusNotif = document.getElementById("status")
+      let statusBar = document.getElementById("statusBar")
+      let scoreCom = 0
+      let scorePlayer = 0
+      playerScore.innerText = scorePlayer
+      comScore.innerText = scoreCom
+     
+      const rock = () => {
+        let random = Math.floor(Math.random()*3)
+        playerPic.src=data[0].src
+        comPic.src = ""
+        playerStatus.innerHTML = ""
+        comStatus.innerHTML = ""
+        setTimeout(() => {
+          comPic.src = data[random].src
+          if (random == 0) {
+            scoreCom+=0
+            scorePlayer+=0
+            playerStatus.innerHTML = status[1]
+            comStatus.innerHTML = status[1]
+            playerScore.innerText = scorePlayer
+            comScore.innerText = scoreCom
+          }
+          else if (random == 1) {
+            scoreCom+=1
+            scorePlayer+=0
+            playerStatus.innerHTML = status[2]
+            comStatus.innerHTML = status[0]
+           playerScore.innerText = scorePlayer
+           comScore.innerText = scoreCom
+          }
+          else if (random == 2) {
+            scoreCom+=0
+            scorePlayer+=1
+            playerStatus.innerHTML = status[0]
+            comStatus.innerHTML = status[2]
+            playerScore.innerText =  scorePlayer
+             comScore.innerText = scoreCom
+          }
+          if (scoreCom === 5) {
+            statusBar.innerText = "You Lose"
+          }
+          else if (scorePlayer === 5) {
+            statusBar.innerText = "You Win"
+          }
+          if (scoreCom === 5 || scorePlayer === 5) {
+            rocks.className = "hidden"
+            papers.className = "hidden"
+            scissorss.className = "hidden"
+            setTimeout(() => {
+              statusNotif.className = "flex flex-col gap-4 justify-center items-center border-2 border-black absolute top-20 left-9 animation duration-200 ease-in-out h-2/3 w-4/5 rounded bg-white"
+            },900)
+          }
+        },900)
+      }
+     const paper = () => {
+        let random = Math.floor(Math.random()*3)
+        playerPic.src=data[1].src
+        comPic.src = ""
+        playerStatus.innerHTML = ""
+        comStatus.innerHTML = ""
+        setTimeout(() => {
+          comPic.src = data[random].src
+          comPic.src = data[random].src
+          if (random == 0) {
+            scoreCom+=0
+            scorePlayer+=1
+            playerStatus.innerHTML = status[0]
+            comStatus.innerHTML = status[2]
+            playerScore.innerText = scorePlayer
+            comScore.innerText = scoreCom
+          }
+          else if (random == 1) {
+            scoreCom+=0
+            scorePlayer+=0
+            playerStatus.innerHTML = status[1]
+            comStatus.innerHTML = status[1]
+           playerScore.innerText = scorePlayer
+           comScore.innerText = scoreCom
+          }
+          else if (random == 2) {
+            scoreCom+=1
+            scorePlayer+=0
+            playerStatus.innerHTML = status[2]
+            comStatus.innerHTML = status[0]
+            playerScore.innerText =  scorePlayer
+             comScore.innerText = scoreCom
+          }
+         if (scoreCom === 5) {
+            statusBar.innerText = "You Lose"
+          }
+          else if (scorePlayer === 5) {
+            statusBar.innerText = "You Win"
+          }
+       if (scoreCom == 5 || scorePlayer == 5) {
+        rocks.className = "hidden"
+        papers.className = "hidden"
+        scissorss.className = "hidden"
+        setTimeout(() => {
+              statusNotif.className = "flex flex-col gap-4 justify-center items-center border-2 border-black absolute top-20 left-9 animation duration-200 ease-in-out h-2/3 w-4/5 rounded bg-white"
+            },900)
+      }
+        },900)
+      }
+     const scissors = () => {
+        let random = Math.floor(Math.random()*3)
+        playerPic.src=data[2].src
+        comPic.src = ""
+        playerStatus.innerHTML = ""
+        comStatus.innerHTML = ""
+        setTimeout(() => {
+          comPic.src = data[random].src
+          if (random == 0) {
+            scoreCom+=1
+            scorePlayer+=0
+            playerStatus.innerHTML = status[2]
+            comStatus.innerHTML = status[0]
+            playerScore.innerText = scorePlayer
+            comScore.innerText = scoreCom
+          }
+          else if (random == 1) {
+            scoreCom+=0
+            scorePlayer+=1
+            playerStatus.innerHTML = status[0]
+            comStatus.innerHTML = status[2]
+           playerScore.innerText = scorePlayer
+           comScore.innerText = scoreCom
+          }
+          else if (random == 2) {
+            scoreCom+=0
+            scorePlayer+=0
+            playerStatus.innerHTML = status[1]
+            comStatus.innerHTML = status[1]
+            playerScore.innerText =  scorePlayer
+             comScore.innerText = scoreCom
+          }
+         if (scoreCom === 5) {
+            statusBar.innerText = "You Lose"
+          }
+          else if (scorePlayer === 5) {
+            statusBar.innerText = "You Win"
+          }
+          if (scoreCom === 5) {
+            statusBar.innerText = "You Lose"
+          }
+          else if (scorePlayer === 5) {
+            statusBar.innerText = "You Win"
+          }
+          if (scoreCom == 5 || scorePlayer == 5) {
+        rocks.className = "hidden"
+        papers.className = "hidden"
+        scissorss.className = "hidden"
+        setTimeout(() => {
+              statusNotif.className = "flex flex-col gap-4 justify-center items-center border-2 border-black absolute top-20 left-9 animation duration-200 ease-in-out h-2/3 w-4/5 rounded bg-white"
+            },900)
+      }
+        },900)
+      }
+  </script>
+</body>
+</html>

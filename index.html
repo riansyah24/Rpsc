@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./dist/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="rps.jpeg">
+  <link rel="manifest" href="manifest.json">
+  <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(function (registration) {
+            console.log(
+              "Service worker terdaftar dengan skop: ",
+              registration.scope
+            );
+          })
+          .catch(function (error) {
+            console.log("Service worker gagal terdaftar: ", error);
+          });
+      } else {
+        console.log("Browser tidak mendukung service worker");
+      }
+    </script>
+  <title>Main Menu</title>
+</head>
+<body class="h-screen w-screen p-3 lg:hidden flex flex-col items-center gap-24 font-[Orbitron]">
+  <div id="htp" class="transition-all duration-500 border-2 border-black rounded p-3 gap-3 fixed bg-white h-4/5 bg-white top-[-100vh]">
+    <div class="w-full flex justify-end">
+      <button id="btn-close" class="text-2xl text-red-600 font-bold">X</button>
+    </div>
+    <h1>The game is similar to the typical rock-paper-scissors. When the score reaches 5, that's when the winner is determined</h1>
+  </div>
+  <!-- How to play btn -->
+  <div class="w-full flex justify-end">
+    <button id="btn-htp" class="border-2 border-black w-5 h-5 flex justify-center items-center p-4 rounded-full font-bold text-lg">?</button>
+  </div>
+  <!-- Logo game -->
+  <div class="text-5xl font-bold">
+    <h1 class="text-center">Rock</h1>
+    <h1 class="text-center">Paper</h1>
+    <h1 class="text-center">Scissors</h1>
+    <h1 class="text-center">Classic</h1>
+  </div>
+  <!-- Button -->
+  <div class="mt-4">
+    <a href="game.html" class="border-2 border-black text-lg py-2 px-4 rounded">START</a>
+  </div>
+  <script>
+    let btnHtp = document.getElementById("btn-htp")
+    let btnClose = document.getElementById("btn-close")
+    let htp = document.getElementById("htp")
+    
+    btnHtp.addEventListener("click",() => {
+      htp.className="transition-all duration-1000 border-2 border-black rounded p-3 gap-3 absolute bg-white h-4/5 bg-white top-3"
+    })
+    
+    btnClose.addEventListener("click",() => {
+      htp.className="transition-all duration-1000 border-2 border-black rounded p-3 gap-3 absolute bg-white h-4/5 bg-white top-[-100vh]"
+    })
+  </script>
+</body>
+</html>
+
+<!--
+"The game is similar to the typical rock-paper-scissors. When the score reaches 3, that's when the winner is determined."  
+-->
