@@ -51,10 +51,17 @@
   <div class="mt-4">
     <a href="game.html" class="border-2 border-black text-lg py-2 px-4 rounded">START</a>
   </div>
+  <script src="https://unpkg.com/@capacitor/core@latest/dist/capacitor.js"></script>
   <script>
     let btnHtp = document.getElementById("btn-htp")
     let btnClose = document.getElementById("btn-close")
     let htp = document.getElementById("htp")
+    
+    document.getElementById('exitApp').addEventListener('click', function() {
+      if (window.Capacitor && window.Capacitor.Plugins.App) {
+        window.Capacitor.Plugins.App.exitApp();
+      }
+    });
     
     btnHtp.addEventListener("click",() => {
       htp.className="transition-all duration-1000 border-2 border-black rounded p-3 gap-3 absolute bg-white h-4/5 bg-white top-3"
@@ -63,7 +70,7 @@
     btnClose.addEventListener("click",() => {
       htp.className="transition-all duration-1000 border-2 border-black rounded p-3 gap-3 absolute bg-white h-4/5 bg-white top-[-100vh]"
     })
-  </script>
+  </s>
 </body>
 </html>
 
