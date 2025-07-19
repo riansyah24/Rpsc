@@ -38,7 +38,17 @@
     <button id="paper" onclick="paper()" class="border-2 border-black p-2 rounded text-lg">Paper</button>
     <button id="scissors" onclick="scissors()" class="border-2 border-black p-2 rounded text-lg">Scissors</button>
   </div>
-  <script>
+  <script type="module">
+    import { App } from '@capacitor/app';
+
+    App.addListener('backButton', ({ canGoBack }) => {
+      if(!canGoBack) {
+        App.exitApp();
+      } else {
+        window.history.back();
+      }
+    });
+    
     let data = [
       {
         name:"Rock",
